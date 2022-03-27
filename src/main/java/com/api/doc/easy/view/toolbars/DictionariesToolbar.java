@@ -17,13 +17,15 @@ public class DictionariesToolbar extends HorizontalLayout {
         this.setSpacing(true);
         this.setDefaultVerticalComponentAlignment(Alignment.CENTER);
 
-        Label label = new Label("Dictionary");
+        Label label = new Label("Dictionaries");
         label.getStyle().set("margin-left", "10px");
         Icon splitIcon = new Icon(VaadinIcon.LINE_V);
+        Icon versionsIcon = new Icon(VaadinIcon.CONNECT_O);
+        versionsIcon.addClassName("toolbar-icon");
         Icon rolesIcon = new Icon(VaadinIcon.USERS);
         rolesIcon.addClassName("toolbar-icon");
         Icon permissionsIcon = new Icon(VaadinIcon.KEY);
         permissionsIcon.addClassName("toolbar-icon");
-        this.add(label, splitIcon, rolesIcon, permissionsIcon);
+        this.add(label, splitIcon, versionsIcon, rolesIcon, permissionsIcon);
     }
 }

@@ -17,7 +17,7 @@ public class EditTabToolbar extends HorizontalLayout {
         this.setSpacing(true);
         this.setDefaultVerticalComponentAlignment(Alignment.CENTER);
 
-        Label label = new Label("Application");
+        Label label = new Label("Application tab");
         label.getStyle().set("margin-left", "10px");
         Icon splitIcon = new Icon(VaadinIcon.LINE_V);
         Icon editIcon = new Icon(VaadinIcon.EDIT);
