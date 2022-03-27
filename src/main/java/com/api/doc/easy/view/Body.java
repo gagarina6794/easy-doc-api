@@ -1,14 +1,16 @@
 package com.api.doc.easy.view;
 
 import com.api.doc.easy.model.ApplicationItem;
-import com.api.doc.easy.view.tabs.HomeTabLayout;
+import com.api.doc.easy.view.tab.ApplicationTabLayout;
+import com.api.doc.easy.view.tab.FormTabLayout;
+import com.api.doc.easy.view.tab.HomeTabLayout;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 
 import javax.annotation.Nullable;
 
-import static com.api.doc.easy.view.CreateApplicationForm.HOME_TAB_STR_ID;
-import static com.api.doc.easy.view.CreateApplicationForm.PLUS_TAB_STR_ID;
+import static com.api.doc.easy.view.tab.FormTabLayout.HOME_TAB_STR_ID;
+import static com.api.doc.easy.view.tab.FormTabLayout.PLUS_TAB_STR_ID;
 
 public class Body extends HorizontalLayout {
 
@@ -21,6 +23,9 @@ public class Body extends HorizontalLayout {
 
     private void init() {
         this.setSizeFull();
+        this.setMargin(false);
+        this.setPadding(false);
+        this.setSpacing(false);
         this.setDefaultVerticalComponentAlignment(Alignment.START);
         this.setJustifyContentMode(JustifyContentMode.CENTER);
         this.add(new HomeTabLayout());
@@ -28,7 +33,7 @@ public class Body extends HorizontalLayout {
 
     public void reload(@Nullable String applicationId, @Nullable String previousSelectedTabId) {
         if (PLUS_TAB_STR_ID.equals(applicationId)) {
-            CreateApplicationForm createApplicationForm = new CreateApplicationForm(mainView.getApplicationService(), mainView.getHeader(), previousSelectedTabId);
+            FormTabLayout createApplicationForm = new FormTabLayout(mainView.getApplicationService(), mainView.getHeader(), previousSelectedTabId);
             this.removeAll();
             this.add(createApplicationForm);
         } else if (HOME_TAB_STR_ID.equals(applicationId) || applicationId == null) {
@@ -38,7 +43,7 @@ public class Body extends HorizontalLayout {
             ApplicationItem applicationItem = mainView.getApplicationService().getById(Long.parseLong(applicationId));
             this.removeAll();
             if (applicationItem != null) {
-                this.add(new Label(applicationItem.getName() + " " + applicationItem.getDate()));
+                this.add(new ApplicationTabLayout());
             } else {
                 this.add(new Label("HOME"));
             }

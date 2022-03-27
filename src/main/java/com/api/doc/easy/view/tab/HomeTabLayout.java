@@ -1,11 +1,12 @@
-package com.api.doc.easy.view.tabs;
+package com.api.doc.easy.view.tab;
 
+import com.api.doc.easy.view.components.VerticalLayout;
 import com.vaadin.flow.component.html.Label;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 
 public class HomeTabLayout extends VerticalLayout {
 
     public HomeTabLayout() {
+        super();
         this.setSizeFull();
         this.add(new Label("HOME"));
     }

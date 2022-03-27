@@ -11,7 +11,7 @@ import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.api.doc.easy.view.CreateApplicationForm.*;
+import static com.api.doc.easy.view.tab.FormTabLayout.*;
 
 public class Header extends HorizontalLayout {
 
