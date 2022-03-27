@@ -1,14 +1,11 @@
 package com.api.doc.easy.view;
 
-import com.api.doc.easy.service.ApplicationService;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.Tabs;
-import org.springframework.context.ApplicationContext;
-import org.springframework.stereotype.Component;
 
 import javax.annotation.Nullable;
 import java.util.HashMap;
@@ -16,20 +13,17 @@ import java.util.Map;
 
 import static com.api.doc.easy.view.CreateApplicationForm.*;
 
-@Component
 public class Header extends HorizontalLayout {
 
-    private final ApplicationService applicationService;
-    private final ApplicationContext context;
+    private final MainView mainView;
 
     private final Map<String, Tab> tabsMap = new HashMap<>();
     private String lastSelectedTabId = null;
 
     private Tabs tabs;
 
-    public Header(ApplicationService applicationService, ApplicationContext context) {
-        this.applicationService = applicationService;
-        this.context = context;
+    public Header(MainView mainView) {
+        this.mainView = mainView;
         init();
     }
 
@@ -47,9 +41,11 @@ public class Header extends HorizontalLayout {
             Tab selectedTab = selectedChangeEvent.getSelectedTab();
             String selectedTabId = selectedTab == null ? null : selectedTab.getId().orElse(null);
 
-            if (context != null) {
-                Body bodyBean = context.getBean(Body.class);
-                bodyBean.reload(selectedTabId, lastSelectedTabId);
+            if (mainView != null) {
+                Body body = mainView.getBody();
+                if (body != null) {
+                    body.reload(selectedTabId, lastSelectedTabId);
+                }
             }
             lastSelectedTabId = selectedTabId;
         });
@@ -61,8 +57,8 @@ public class Header extends HorizontalLayout {
 
     private void initTabs(Tabs tabs) {
         tabs.add(getHomeTab());
-        if (applicationService != null) {
-            applicationService.getAll().forEach(applicationItem -> {
+        if (mainView != null) {
+            mainView.getApplicationService().getAll().forEach(applicationItem -> {
                 Tab tab = new Tab(applicationItem.getName());
                 String tabId = String.valueOf(applicationItem.getId());
                 tab.setId(tabId);
