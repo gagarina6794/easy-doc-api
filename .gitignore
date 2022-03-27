@@ -12,6 +12,8 @@ node_modules/
 frontend/generated/
 pnpmfile.js
 vite.generated.ts
+package-lock.json
+package.json
 
 # Browser drivers for local integration tests
 drivers/
