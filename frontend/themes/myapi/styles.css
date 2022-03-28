@@ -4,6 +4,22 @@
     border: #b9d5fd solid 1px;
 }
 
+.top-bordered {
+    border-top: #b9d5fd solid 1px;
+}
+
+.bottom-bordered {
+    border-bottom: #b9d5fd solid 1px;
+}
+
+.left-bordered {
+    border-left: #b9d5fd solid 1px;
+}
+
+.right-bordered {
+    border-right: #b9d5fd solid 1px;
+}
+
 .toolbar-icon {
     height: 16px;
 }

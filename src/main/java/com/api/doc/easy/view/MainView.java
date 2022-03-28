@@ -1,11 +1,13 @@
 package com.api.doc.easy.view;
 
 import com.api.doc.easy.service.ApplicationService;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.api.doc.easy.view.components.VerticalLayout;
+import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import org.springframework.context.ApplicationContext;
 
+@CssImport("./themes/myapi/styles.css")
 @PageTitle("easy-doc-api")
 @Route(value = "")
 public class MainView extends VerticalLayout {

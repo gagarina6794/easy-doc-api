@@ -1,31 +1,31 @@
 package com.api.doc.easy.view.toolbars;
 
-import com.api.doc.easy.view.components.HorizontalLayout;
-import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 
-public class DictionariesToolbar extends HorizontalLayout {
+public class RootToolbar extends HorizontalLayout {
 
-    public DictionariesToolbar() {
+    public RootToolbar() {
         super();
         init();
     }
 
     private void init() {
         this.setWidthFull();
+        this.setMargin(false);
+        this.setPadding(true);
         this.setSpacing(true);
         this.setDefaultVerticalComponentAlignment(Alignment.CENTER);
+        this.setJustifyContentMode(JustifyContentMode.START);
 
-        Label label = new Label("Dictionaries");
-        label.getStyle().set("margin-left", "10px");
-        Icon splitIcon = new Icon(VaadinIcon.LINE_V);
         Icon versionsIcon = new Icon(VaadinIcon.CONNECT_O);
         versionsIcon.addClassName("toolbar-icon");
         Icon rolesIcon = new Icon(VaadinIcon.USERS);
         rolesIcon.addClassName("toolbar-icon");
         Icon permissionsIcon = new Icon(VaadinIcon.KEY);
         permissionsIcon.addClassName("toolbar-icon");
-        this.add(label, splitIcon, versionsIcon, rolesIcon, permissionsIcon);
+        this.add(versionsIcon, rolesIcon, permissionsIcon);
+
     }
 }

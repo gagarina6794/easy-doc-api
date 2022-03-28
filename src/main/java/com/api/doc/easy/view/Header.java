@@ -11,7 +11,8 @@ import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.api.doc.easy.view.tab.FormTabLayout.*;
+import static com.api.doc.easy.view.tab.FormTabLayout.PLUS_TAB_ID;
+import static com.api.doc.easy.view.tab.FormTabLayout.PLUS_TAB_STR_ID;
 
 public class Header extends HorizontalLayout {
 
@@ -29,6 +30,7 @@ public class Header extends HorizontalLayout {
 
     private void init() {
         this.setWidthFull();
+        this.setPadding(true);
         this.setDefaultVerticalComponentAlignment(Alignment.CENTER);
         this.setJustifyContentMode(JustifyContentMode.START);
 
@@ -52,11 +54,17 @@ public class Header extends HorizontalLayout {
 
         initTabs(tabs);
 
-        this.add(logoImage, tabs);
+        Icon editIcon = new Icon(VaadinIcon.EDIT);
+        editIcon.addClassName("toolbar-icon");
+        editIcon.setColor("#709fdc");
+        Icon deleteIcon = new Icon(VaadinIcon.CLOSE);
+        deleteIcon.addClassName("toolbar-icon");
+        deleteIcon.setColor("#511932");
+
+        this.add(logoImage, tabs, editIcon, deleteIcon);
     }
 
     private void initTabs(Tabs tabs) {
-        tabs.add(getHomeTab());
         if (mainView != null) {
             mainView.getApplicationService().getAll().forEach(applicationItem -> {
                 Tab tab = new Tab(applicationItem.getName());
@@ -69,19 +77,9 @@ public class Header extends HorizontalLayout {
         tabs.add(getPlusTab());
     }
 
-    private Tab getHomeTab() {
-        Icon addTabIcon = new Icon(VaadinIcon.HOME);
-        addTabIcon.setColor("#709fdc");
-        Tab tab = new Tab(addTabIcon);
-        String homeTabId = String.valueOf(HOME_TAB_ID);
-        tab.setId(homeTabId);
-        tabsMap.put(homeTabId, tab);
-        return tab;
-    }
-
     private Tab getPlusTab() {
         Icon addTabIcon = new Icon(VaadinIcon.PLUS);
-        addTabIcon.setColor("#709fdc");
+        addTabIcon.setColor("#afca54");
         Tab tab = new Tab(addTabIcon);
         String plusTabId = String.valueOf(PLUS_TAB_ID);
         tab.setId(plusTabId);
@@ -100,7 +98,7 @@ public class Header extends HorizontalLayout {
         if (tab != null) {
             tabs.setSelectedTab(tab);
         } else {
-            tabs.setSelectedTab(tabsMap.get(HOME_TAB_STR_ID));
+            tabs.setSelectedTab(tabsMap.get(PLUS_TAB_STR_ID));
         }
     }
 }

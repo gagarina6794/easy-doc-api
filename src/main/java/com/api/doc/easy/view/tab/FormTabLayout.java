@@ -11,9 +11,7 @@ import com.vaadin.flow.component.textfield.TextField;
 
 public class FormTabLayout extends FormLayout {
 
-    public static final Long HOME_TAB_ID = -1L;
-    public static final Long PLUS_TAB_ID = -2L;
-    public static final String HOME_TAB_STR_ID = String.valueOf(HOME_TAB_ID);
+    public static final Long PLUS_TAB_ID = -1L;
     public static final String PLUS_TAB_STR_ID = String.valueOf(PLUS_TAB_ID);
 
     public FormTabLayout(ApplicationService applicationService, Header header, String selectedTabId) {
