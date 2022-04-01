@@ -1,6 +1,8 @@
 package com.api.doc.easy.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.Objects;
 
@@ -12,12 +14,17 @@ public class ApplicationItem {
     @Column(name = "id", updatable = false, nullable = false)
     protected Long id;
 
+    @NotNull
     @Column(name = "date", nullable = false)
     @Temporal(TemporalType.DATE)
     private Date date = new Date();
 
+    @NotBlank
     @Column(name = "name", nullable = false)
     private String name;
+
+    @Column(name = "deleted")
+    private boolean deleted;
 
     public ApplicationItem() {
     }
@@ -40,6 +47,14 @@ public class ApplicationItem {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 
     @Override

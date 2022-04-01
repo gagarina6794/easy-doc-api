@@ -1,8 +1,10 @@
 package com.api.doc.easy.view;
 
+import com.api.doc.easy.view.components.ConfirmDialog;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.Tabs;
@@ -57,9 +59,28 @@ public class Header extends HorizontalLayout {
         Icon editIcon = new Icon(VaadinIcon.EDIT);
         editIcon.addClassName("toolbar-icon");
         editIcon.setColor("#709fdc");
+
         Icon deleteIcon = new Icon(VaadinIcon.CLOSE);
         deleteIcon.addClassName("toolbar-icon");
         deleteIcon.setColor("#511932");
+        deleteIcon.addClickListener(iconClickEvent -> {
+            Tab selectedTab = tabs.getSelectedTab();
+
+            if (selectedTab != null && mainView != null) {
+                String selectedTabId = selectedTab.getId().orElse(null);
+
+                if (String.valueOf(PLUS_TAB_ID).equals(selectedTabId) || selectedTabId == null) {
+                    new Notification("Selected tab can't be removed", 2_000, Notification.Position.MIDDLE).open();
+                } else {
+                    new ConfirmDialog("Delete '" + selectedTab.getLabel() + "' application tab?",
+                            () -> {
+                                mainView.getApplicationService().delete(Long.parseLong(selectedTabId));
+                                reloadTabs();
+                            }
+                    ).open();
+                }
+            }
+        });
 
         this.add(logoImage, tabs, editIcon, deleteIcon);
     }

@@ -11,5 +11,5 @@ import java.util.List;
 @Transactional
 public interface ApplicationRepository extends JpaRepository<ApplicationItem, Long> {
 
-    List<ApplicationItem> findAllByOrderByIdAsc();
+    List<ApplicationItem> findAllByDeletedFalseOrderByNameAsc();
 }

@@ -1,6 +1,6 @@
 package com.api.doc.easy.view.components;
 
-public abstract class VerticalLayout extends com.vaadin.flow.component.orderedlayout.VerticalLayout {
+public class VerticalLayout extends com.vaadin.flow.component.orderedlayout.VerticalLayout {
 
     public VerticalLayout() {
         this.setMargin(false);
