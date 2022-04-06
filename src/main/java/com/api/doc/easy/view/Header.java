@@ -19,6 +19,7 @@ import static com.api.doc.easy.view.tab.FormTabLayout.PLUS_TAB_STR_ID;
 public class Header extends HorizontalLayout {
 
     private final MainView mainView;
+    private Tab addTabForm;
 
     private final Map<String, Tab> tabsMap = new HashMap<>();
     private String lastSelectedTabId = null;
@@ -36,7 +37,7 @@ public class Header extends HorizontalLayout {
         this.setDefaultVerticalComponentAlignment(Alignment.CENTER);
         this.setJustifyContentMode(JustifyContentMode.START);
 
-        Image logoImage = new Image("icons/logo.png", "");
+        Image logoImage = new Image("icons/logo.svg", "");
         logoImage.setWidth("200px");
 
         tabs = new Tabs();
@@ -59,6 +60,22 @@ public class Header extends HorizontalLayout {
         Icon editIcon = new Icon(VaadinIcon.EDIT);
         editIcon.addClassName("toolbar-icon");
         editIcon.setColor("#709fdc");
+        editIcon.addClickListener(iconClickEvent -> {
+            Tab selectedTab = tabs.getSelectedTab();
+
+            if (selectedTab != null && mainView != null) {
+                String selectedTabId = selectedTab.getId().orElse(null);
+
+                if (String.valueOf(PLUS_TAB_ID).equals(selectedTabId) || selectedTabId == null) {
+                    new Notification("Selected tab can't be changed", 2_000, Notification.Position.MIDDLE).open();
+                } else {
+
+                    String applicationItemName = selectedTab.getLabel();
+                    tabs.setSelectedTab(addTabForm);
+                    mainView.getBody().getCreateApplicationForm().updateApplicationItem(selectedTabId, applicationItemName);
+                }
+            }
+        });
 
         Icon deleteIcon = new Icon(VaadinIcon.CLOSE);
         deleteIcon.addClassName("toolbar-icon");
@@ -101,11 +118,11 @@ public class Header extends HorizontalLayout {
     private Tab getPlusTab() {
         Icon addTabIcon = new Icon(VaadinIcon.PLUS);
         addTabIcon.setColor("#afca54");
-        Tab tab = new Tab(addTabIcon);
+        addTabForm = new Tab(addTabIcon);
         String plusTabId = String.valueOf(PLUS_TAB_ID);
-        tab.setId(plusTabId);
-        tabsMap.put(plusTabId, tab);
-        return tab;
+        addTabForm.setId(plusTabId);
+        tabsMap.put(plusTabId, addTabForm);
+        return addTabForm;
     }
 
     public void reloadTabs() {

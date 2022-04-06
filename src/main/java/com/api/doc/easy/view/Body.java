@@ -14,6 +14,7 @@ import static com.api.doc.easy.view.tab.FormTabLayout.PLUS_TAB_STR_ID;
 public class Body extends HorizontalLayout {
 
     private final MainView mainView;
+    private FormTabLayout createApplicationForm;
 
     public Body(MainView mainView) {
         this.mainView = mainView;
@@ -35,7 +36,7 @@ public class Body extends HorizontalLayout {
     }
 
     public void reload(@Nullable String applicationId, @Nullable String previousSelectedTabId) {
-        FormTabLayout createApplicationForm = new FormTabLayout(mainView.getApplicationService(), mainView.getHeader(), previousSelectedTabId);
+        createApplicationForm = new FormTabLayout(mainView.getApplicationService(), mainView.getHeader(), previousSelectedTabId);
 
         if (PLUS_TAB_STR_ID.equals(applicationId) || applicationId == null) {
             this.removeAll();
@@ -49,8 +50,9 @@ public class Body extends HorizontalLayout {
                 this.add(createApplicationForm);
             }
         }
-
     }
 
-
+    public FormTabLayout getCreateApplicationForm() {
+        return createApplicationForm;
+    }
 }

@@ -36,4 +36,12 @@ public class ApplicationService {
             applicationRepository.save(applicationItem);
         });
     }
+
+    @Transactional
+    public void update(Long id, String newName) {
+        applicationRepository.findById(id).ifPresent(applicationItem -> {
+            applicationItem.setName(newName);
+            applicationRepository.save(applicationItem);
+        });
+    }
 }
